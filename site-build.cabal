@@ -1,0 +1,23 @@
+cabal-version: 3.16
+name:          site-build
+version:       0.1.0.0
+license:       MIT
+author:        HammerHead Studio
+maintainer:    59007706+SAKASHITA-Koki@users.noreply.github.com
+build-type:    Simple
+
+common warnings
+    ghc-options: -Wall
+
+executable site-build
+    -- Import common warning flags.
+    import:           warnings
+    main-is:          Main.hs
+    hs-source-dirs:   app
+    default-language: Haskell2010
+    ghc-options:      -Wall
+
+    build-depends:
+        base        >= 4.14 && < 5,
+        directory   >= 1.3,
+        filepath    >= 1.4
