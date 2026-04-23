@@ -109,6 +109,22 @@ h1 {
 }
 
 
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  vertical-align: top;
+  padding-right: 1em;
+  white-space: nowrap;
+}
+
+td {
+  width: 100%;
+}
+
+
 a {
   color: var(--fg);
   text-decoration: none;
