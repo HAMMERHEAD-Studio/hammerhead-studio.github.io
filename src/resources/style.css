@@ -60,8 +60,10 @@ header h1 {
 
 nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   margin: 8px auto 0px;
+  white-space: nowrap;
 }
 
 
