@@ -69,6 +69,10 @@ main {
   grid-area: main;
 }
 
+main > *:first-child {
+  margin-top: 24px;
+}
+
 
 footer {
   grid-area: footer;
