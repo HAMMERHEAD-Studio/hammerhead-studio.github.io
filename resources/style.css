@@ -27,7 +27,7 @@ body {
     "footer footer footer ";
   gap: 16px;
   margin: 0;
-  min-height: calc(100vh - 32px);
+  min-height: calc(100vh);
   color: var(--fg);
   background-color: var(--bg);
   font-family: var(--ff);
@@ -67,6 +67,10 @@ nav {
 
 main {
   grid-area: main;
+}
+
+main > *:first-child {
+  margin-top: 24px;
 }
 
 
