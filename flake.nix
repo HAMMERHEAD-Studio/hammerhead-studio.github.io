@@ -21,7 +21,6 @@
             pkgs.haskellPackages.ghc
             pkgs.haskellPackages.cabal-install
             pkgs.haskellPackages.haskell-language-server
-            pkgs.imagemagick
           ];
         };
       }

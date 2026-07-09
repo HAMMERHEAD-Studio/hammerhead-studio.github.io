@@ -5,43 +5,47 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  build:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Haskell (GHC + Cabal)
-        uses: haskell-actions/setup@v2
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
         with:
-          ghc-version: '9.6'
-          cabal-version: 'latest'
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Cache Cabal store
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cabal/packages
-            ~/.cabal/store
-            dist-newstyle
-          key: ${{ runner.os }}-cabal-${{ hashFiles('*.cabal', 'cabal.project') }}
-          restore-keys: |
-            ${{ runner.os }}-cabal-
+      - name: Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - name: Update Hackage index
-        run: cabal update
+        run: nix develop --command cabal update
 
-      - name: Build
-        run: cabal build
+      - name: Run site builder via Nix
+        run: nix develop --command cabal run site-build
 
-      - name: Run site builder
-        run: cabal run site-build
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+        id: deployment
+        uses: actions/deploy-pages@v4
