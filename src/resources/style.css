@@ -176,3 +176,35 @@ img {
 /* @media only screen and (max-width: 800px) { */
 /*   .grid .member { grid-column-start: span 2; } */
 /* } */
+
+
+.shorts {
+  max-width: var(--text-width);
+  margin: auto;
+}
+
+.short {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.short > img {
+  width: 36%;
+  height: auto;
+}
+
+.short > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.short h2 {
+  font-size: 1.2em;
+  margin: 0 0 8px;
+}
+
+.short p {
+  margin: 0;
+}
