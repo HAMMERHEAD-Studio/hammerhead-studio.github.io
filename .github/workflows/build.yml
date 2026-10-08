@@ -28,7 +28,6 @@ jobs:
         with:
           extra-conf: |
             experimental-features = nix-command flakes
-          installer-version: 2.33.3
 
       - name: Update Hackage index
         run: nix develop --command cabal update
