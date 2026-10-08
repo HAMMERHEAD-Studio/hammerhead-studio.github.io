@@ -5,7 +5,11 @@
   --ff: sans-serif;
 
   --main-width: 800px;
-  --text-width: 720px;
+  --large-width: 800px;
+  --medium-width: 720px;
+  --small-width: 640px;
+
+  --gap: 16px;
 }
 
 
@@ -25,7 +29,7 @@ body {
     "header header header "
     ".      main   .      "
     "footer footer footer ";
-  gap: 16px;
+  gap: var(--gap);
   margin: 0;
   min-height: calc(100vh);
   color: var(--fg);
@@ -41,9 +45,8 @@ header {
   position: sticky;
   top: 0;
   left: 0;
-  padding: 16px;
+  padding: var(--gap);
   border-bottom: 1px var(--fg) solid;
-  /* backdrop-filter: blur(2px); */
   background: linear-gradient(
     to bottom,
     color-mix(in srgb, var(--bg), transparent 75%) 0%,
@@ -80,7 +83,7 @@ footer {
   grid-area: footer;
   border-top: 1px var(--fg) solid;
   margin-top: 32px;
-  padding: 16px;
+  padding: var(--gap);
 }
 
 
@@ -96,8 +99,9 @@ h6,
 p,
 ul,
 ol,
-table {
-  max-width: var(--text-width);
+table,
+.container {
+  max-width: var(--medium-width);
   margin: 40px auto;
 }
 
@@ -148,9 +152,11 @@ a:visited {
 
 
 img {
+  display: block;
   width: 100%;
+  max-width: var(--small-width);
+  margin: 0 auto;
 }
-
 
 /* ------------------------------------------------------------ */
 
@@ -158,53 +164,55 @@ img {
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  max-width: var(--text-width);
+  gap: var(--gap);
+  max-width: var(--medium-width);
   margin: auto;
 }
 
+@media only screen and (max-width: 560px) {
+  .grid.sm {
+    grid-template-columns: 1fr;
+  }
+}
 
-.member :is(h1, h2, h3, h4, h5, h6, p) {
+/* ------------------------------------------------------------ */
+
+
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6,
+.card p {
   margin: 8px auto;
 }
 
-.member img {
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6 {
+  margin-top: 16px;
+}
+
+.card img {
   display: block;
 }
 
 
-/* @media only screen and (max-width: 800px) { */
-/*   .grid .member { grid-column-start: span 2; } */
-/* } */
+/* ------------------------------------------------------------ */
 
 
-.shorts {
-  max-width: var(--text-width);
-  margin: auto;
+.large {
+  max-width: var(--large-width);
 }
 
-.short {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  margin: 24px 0;
+.medium {
+  max-width: var(--medium-width);
 }
 
-.short > img {
-  width: 36%;
-  height: auto;
-}
-
-.short > div {
-  flex: 1;
-  min-width: 0;
-}
-
-.short h2 {
-  font-size: 1.2em;
-  margin: 0 0 8px;
-}
-
-.short p {
-  margin: 0;
+.small {
+  max-width: var(--small-width);
 }
