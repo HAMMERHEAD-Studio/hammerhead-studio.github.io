@@ -7,3 +7,5 @@ dist-newstyle/
 dist/
 *.hi
 *.o
+
+.DS_Store
