@@ -29,11 +29,8 @@ jobs:
           extra-conf: |
             experimental-features = nix-command flakes
 
-      - name: Update Hackage index
-        run: nix develop --command cabal update
-
       - name: Run site builder via Nix
-        run: nix develop --command cabal run site-build
+        run: nix run .#build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
