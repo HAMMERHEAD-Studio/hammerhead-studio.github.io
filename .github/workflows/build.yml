@@ -24,13 +24,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Nix
-        uses: cachix/install-nix-action@v30
+      - uses: NixOS/nix-installer-action@main
         with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@v8
+          extra-conf: |
+            experimental-features = nix-command flakes
+          installer-version: 2.33.3
 
       - name: Update Hackage index
         run: nix develop --command cabal update
