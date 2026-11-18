@@ -24,13 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: NixOS/nix-installer-action@main
-        with:
-          extra-conf: |
-            experimental-features = nix-command flakes
-
-      - name: Run site builder via Nix
-        run: nix run .#build
+      - name: Build
+        run: |
+          chmod u+x ./app/build.sh
+          ./app/build.sh src/ dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
